@@ -1,4 +1,4 @@
-// package logger represents a generic logging interface
+// Package logger represents a generic logging interface
 package logger
 
 // Log is a package level variable, every program should access logging function through "Log"
