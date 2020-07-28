@@ -6,7 +6,7 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/sergionunezgo/gorest/internal/logger"
+	"github.com/sergionunezgo/goservice/internal/logger"
 	"github.com/urfave/negroni"
 )
 

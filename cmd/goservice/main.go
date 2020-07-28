@@ -5,9 +5,9 @@ import (
 	"os/signal"
 	"syscall"
 
-	"github.com/sergionunezgo/gorest/app/service"
-	"github.com/sergionunezgo/gorest/internal/logger"
-	"github.com/sergionunezgo/gorest/internal/logger/zap"
+	"github.com/sergionunezgo/goservice/app/service"
+	"github.com/sergionunezgo/goservice/internal/logger"
+	"github.com/sergionunezgo/goservice/internal/logger/zap"
 	"github.com/urfave/cli"
 )
 

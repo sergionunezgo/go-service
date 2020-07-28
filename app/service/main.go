@@ -3,8 +3,8 @@ package service
 import (
 	"strconv"
 
-	"github.com/sergionunezgo/gorest/app/service/webserver"
-	"github.com/sergionunezgo/gorest/internal/logger"
+	"github.com/sergionunezgo/goservice/app/service/webserver"
+	"github.com/sergionunezgo/goservice/internal/logger"
 )
 
 type Config struct {

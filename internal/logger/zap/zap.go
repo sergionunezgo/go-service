@@ -5,7 +5,7 @@ import (
 	"encoding/json"
 
 	"github.com/pkg/errors"
-	"github.com/sergionunezgo/gorest/internal/logger"
+	"github.com/sergionunezgo/goservice/internal/logger"
 	"go.uber.org/zap"
 )
 
@@ -47,7 +47,7 @@ func initLog() (zap.Logger, error) {
 			"stacktraceKey":  	"stacktrace",
 			"callerKey":      	"caller",
 			"lineEnding":     	"\n",
-			"timeEncoder":     	"time",
+			"timeEncoder":     	"rfc3339",
 			"levelEncoder":    	"lowercaseLevel",
 			"durationEncoder": 	"stringDuration",
 			"callerEncoder":   	"shortCaller"
