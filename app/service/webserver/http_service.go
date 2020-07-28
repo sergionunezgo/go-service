@@ -21,11 +21,15 @@ func (lf logFunc) ServeHTTP(rw http.ResponseWriter, r *http.Request, next http.H
 	next(rw, r)
 }
 
-type HttpService struct {
+// HTTPService is the struct that will hold references to all necessary data for
+// running an http server.
+type HTTPService struct {
 	srv *http.Server
 }
 
-func NewHttpService(host string, port string) *HttpService {
+// NewHTTPService will run the setup process and create a HTTPService that can be
+// used to run a http api.
+func NewHTTPService(host string, port string) *HTTPService {
 	r := mux.NewRouter().StrictSlash(true)
 	setupRoutes(r)
 
@@ -42,17 +46,20 @@ func NewHttpService(host string, port string) *HttpService {
 		IdleTimeout:  time.Second * 60,
 	}
 
-	return &HttpService{
+	return &HTTPService{
 		srv: srv,
 	}
 }
 
-func (as *HttpService) Start() error {
+// Start will begin listening on the host:port for requests.
+// Blocking call.
+func (as *HTTPService) Start() error {
 	logger.Log.Infof("service listening on address: %v", as.srv.Addr)
 	return as.srv.ListenAndServe()
 }
 
-func (as *HttpService) Close() error {
+// Close will teardown/close any resources used by this http service.
+func (as *HTTPService) Close() error {
 	logger.Log.Info("ApiService Close method executed")
 	return nil
 }

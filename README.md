@@ -4,18 +4,18 @@ Base web service project in Go, currently aiming for basic http api implementati
 
 End goal is to have a single project that could be run using either gRPC or REST api.
 
-# Requirements
+## Requirements
 
 - Go v1.14
 - make
 
-# Environment Variables
+## Environment Variables
 
 - `HTTP_PORT`: 80
 - `HTTP_HOST`: localhost
 - `LOG_LEVEL`: debug
 
-# Usage
+## Usage
 
 Only need to clone the repo and run
 
