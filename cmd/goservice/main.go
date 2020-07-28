@@ -41,14 +41,21 @@ func createApp() *cli.App {
 			Name:        "http_port",
 			EnvVar:      "HTTP_PORT",
 			Value:       80,
-			Usage:       "port for http service",
+			Usage:       "port for the http service",
 			Destination: &config.Port,
+		},
+		cli.StringFlag{
+			Name:        "http_host",
+			EnvVar:      "HTTP_HOST",
+			Value:       "localhost",
+			Usage:       "host for the http service",
+			Destination: &config.Host,
 		},
 		cli.StringFlag{
 			Name:        "log_level",
 			EnvVar:      "LOG_LEVEL",
 			Value:       "debug",
-			Usage:       "Log level for the logger",
+			Usage:       "log level for the logger",
 			Destination: &config.LogLevel,
 		},
 	}
