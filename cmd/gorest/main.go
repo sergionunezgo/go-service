@@ -1,12 +1,11 @@
 package main
 
 import (
-	"errors"
-	"io"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"github.com/sergionunezgo/gorest/app/service"
 	"github.com/sergionunezgo/gorest/internal/logger"
 	"github.com/sergionunezgo/gorest/internal/logger/zap"
 	"github.com/urfave/cli"
@@ -14,7 +13,7 @@ import (
 
 var (
 	// Reference to the api service, it has to implement io.Closer interface for clean-up.
-	apiService io.Closer
+	serviceRef service.Service
 )
 
 func main() {
@@ -34,10 +33,7 @@ func createApp() *cli.App {
 	setupInterruptCloseHandler()
 
 	// May be replaced with actual config struct for the service.
-	var config struct {
-		Port     int
-		LogLevel string
-	}
+	config := &service.Config{}
 	app := cli.NewApp()
 	app.Version = "0.0.0"
 	app.Flags = []cli.Flag{
@@ -58,9 +54,10 @@ func createApp() *cli.App {
 	}
 
 	app.Action = func(ctx *cli.Context) error {
-		logger.Log.Info("initializing service")
-		// apiService, err := server.New(&config)
-		return errors.New("not implemented") // err
+		logger.Log.Info("app start action")
+		serviceRef = service.New(config)
+		err := serviceRef.Start()
+		return err
 	}
 
 	return app
@@ -74,8 +71,8 @@ func setupInterruptCloseHandler() {
 		<-channel
 		logger.Log.Warn("service received interruption signal, clean-up and exit")
 		// Call close method to perform all necessary clean-up.
-		if apiService != nil {
-			apiService.Close()
+		if serviceRef != nil {
+			serviceRef.Close()
 		}
 		os.Exit(0)
 	}()

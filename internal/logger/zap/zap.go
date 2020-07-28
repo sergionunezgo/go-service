@@ -36,7 +36,7 @@ func initLog() (zap.Logger, error) {
 		"level": "info",
 		"Development": true,
 		"DisableCaller": false,
-		"encoding": "console",
+		"encoding": "json",
 		"outputPaths": ["stdout"],
 		"errorOutputPaths": ["stderr"],
 		"encoderConfig": {
