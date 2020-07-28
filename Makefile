@@ -1,6 +1,6 @@
 
 run: build
-	./build/gorest
+	./build/goservice
 
 build:
 	./script/build.sh
