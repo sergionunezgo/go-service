@@ -2,9 +2,15 @@
 run: build
 	./build/goservice
 
+.PHONY: build
 build:
 	./script/build.sh
-.PHONY: build
+
+run-docker: build-docker
+	./script/run-docker.sh
+
+build-docker:
+	./script/build-docker.sh
 
 format:
 	./script/format.sh
