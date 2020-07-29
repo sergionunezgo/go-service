@@ -29,7 +29,7 @@ type HTTPService struct {
 
 // NewHTTPService will run the setup process and create a HTTPService that can be
 // used to run a http api.
-func NewHTTPService(host string, port string) *HTTPService {
+func NewHTTPService(port int) *HTTPService {
 	r := mux.NewRouter().StrictSlash(true)
 	setupRoutes(r)
 
@@ -40,7 +40,7 @@ func NewHTTPService(host string, port string) *HTTPService {
 
 	srv := &http.Server{
 		Handler:      n,
-		Addr:         fmt.Sprintf("%s:%s", host, port),
+		Addr:         fmt.Sprintf(":%d", port),
 		WriteTimeout: 15 * time.Second,
 		ReadTimeout:  15 * time.Second,
 		IdleTimeout:  time.Second * 60,

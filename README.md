@@ -11,9 +11,14 @@ End goal is to have a single project that could be run using either gRPC or REST
 
 ## Environment Variables
 
-- `HTTP_PORT`: 80
-- `HTTP_HOST`: localhost
+Service:
+
+- `API_PORT`: 80
 - `LOG_LEVEL`: debug
+
+Docker:
+
+- `DOCKER_REPO`: user/repo
 
 ## Usage
 
@@ -21,6 +26,12 @@ Only need to clone the repo and run
 
 ```bash
 make
+```
+
+Or run with Docker, you have to set the Docker env vars.
+
+```bash
+make run-docker
 ```
 
 ## License

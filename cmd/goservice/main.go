@@ -38,18 +38,11 @@ func createApp() *cli.App {
 	app.Version = "0.0.0"
 	app.Flags = []cli.Flag{
 		cli.IntFlag{
-			Name:        "http_port",
-			EnvVar:      "HTTP_PORT",
+			Name:        "api_port",
+			EnvVar:      "API_PORT",
 			Value:       80,
-			Usage:       "port for the http service",
+			Usage:       "port for the web service",
 			Destination: &config.Port,
-		},
-		cli.StringFlag{
-			Name:        "http_host",
-			EnvVar:      "HTTP_HOST",
-			Value:       "localhost",
-			Usage:       "host for the http service",
-			Destination: &config.Host,
 		},
 		cli.StringFlag{
 			Name:        "log_level",
