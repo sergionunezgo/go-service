@@ -23,7 +23,7 @@ func main() {
 	defer zap.CloseLog()
 	logger.Log.Info("starting api service")
 	if err := createApp().Run(os.Args); err != nil {
-		logger.Log.Fatalf("service failed to start: %+v \n", err)
+		logger.Log.Fatalf("service failed to start: %+v\n", err)
 		os.Exit(1)
 	}
 }
