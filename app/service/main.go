@@ -1,7 +1,7 @@
 package service
 
 import (
-	"github.com/sergionunezgo/goservice/app/service/webserver"
+	"github.com/sergionunezgo/goservice/app/service/http"
 	"github.com/sergionunezgo/goservice/internal/logger"
 )
 
@@ -20,5 +20,5 @@ type Service interface {
 // New will return a Service that can be used to handle client requests.
 func New(cfg *Config) Service {
 	logger.Log.Info("initializing api service")
-	return webserver.NewHTTPService(cfg.Port)
+	return http.NewService(cfg.Port)
 }
