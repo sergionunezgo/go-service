@@ -6,8 +6,8 @@ import (
 	"time"
 
 	"github.com/gorilla/mux"
-	"github.com/sergionunezgo/goservice/app/service/greeting"
-	"github.com/sergionunezgo/goservice/internal/logger"
+	"github.com/sergionunezgo/go-service/app/service/greeting"
+	"github.com/sergionunezgo/go-service/internal/logger"
 	"github.com/urfave/negroni"
 )
 
@@ -24,6 +24,19 @@ type Handler interface {
 // running an http server.
 type Service struct {
 	srv *http.Server
+}
+
+// Start will begin listening on the host:port for requests.
+// Blocking call.
+func (s *Service) Start() error {
+	logger.Log.Infof("service listening on address: %v", s.srv.Addr)
+	return s.srv.ListenAndServe()
+}
+
+// Close will teardown/close any resources used by this http service.
+func (s *Service) Close() error {
+	logger.Log.Info("closing http service")
+	return s.srv.Close()
 }
 
 // NewService will run the setup process and create a Service that can be
@@ -52,19 +65,6 @@ func NewService(port int) *Service {
 	return &Service{
 		srv: srv,
 	}
-}
-
-// Start will begin listening on the host:port for requests.
-// Blocking call.
-func (as *Service) Start() error {
-	logger.Log.Infof("service listening on address: %v", as.srv.Addr)
-	return as.srv.ListenAndServe()
-}
-
-// Close will teardown/close any resources used by this http service.
-func (as *Service) Close() error {
-	logger.Log.Info("ApiService Close method executed")
-	return nil
 }
 
 func logMiddleware(rw http.ResponseWriter, r *http.Request, next http.HandlerFunc) {

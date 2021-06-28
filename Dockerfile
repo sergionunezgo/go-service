@@ -1,4 +1,4 @@
-FROM golang:1.14 as build
+FROM golang:1.16 as build
 
 WORKDIR /go/src/app
 
@@ -10,14 +10,14 @@ ENV CGO_ENABLED 0
 
 RUN make build
 
-RUN chown -R appuser:appuser build/goservice
+RUN chown -R appuser:appuser build/go-service
 
 FROM scratch as release
 
 COPY --from=build /etc/passwd /etc/passwd
 
-COPY --from=build /go/src/app/build/goservice /goservice
+COPY --from=build /go/src/app/build/go-service /go-service
 
 USER appuser
 
-ENTRYPOINT [ "/goservice" ]
+ENTRYPOINT [ "/go-service" ]

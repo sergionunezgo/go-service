@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/sergionunezgo/goservice/app/service/http"
-	"github.com/sergionunezgo/goservice/internal/logger"
+	"github.com/sergionunezgo/go-service/app/service/http"
+	"github.com/sergionunezgo/go-service/internal/logger"
 )
 
 // Config defines the values that can be loaded from env vars or other config files.
