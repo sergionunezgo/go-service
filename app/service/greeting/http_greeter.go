@@ -5,7 +5,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/sergionunezgo/goservice/internal/logger"
+	"github.com/sergionunezgo/go-service/internal/logger"
 )
 
 // GreeterHandler struct will handle greet requests to greet back at callers.

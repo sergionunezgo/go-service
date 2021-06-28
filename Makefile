@@ -1,6 +1,5 @@
-
 run: build
-	./build/goservice
+	./build/go-service
 
 .PHONY: build
 build:
@@ -20,3 +19,5 @@ lint:
 
 test:
 	./script/test.sh
+
+precommit: format lint build test

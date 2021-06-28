@@ -4,7 +4,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"github.com/sergionunezgo/goservice/internal/logger"
+	"github.com/sergionunezgo/go-service/internal/logger"
 )
 
 // NotFoundHandler struct configures and responds to all invalid paths.

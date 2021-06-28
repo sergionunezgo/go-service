@@ -1,13 +1,14 @@
 package main
 
 import (
+	"log"
 	"os"
 	"os/signal"
 	"syscall"
 
-	"github.com/sergionunezgo/goservice/app/service"
-	"github.com/sergionunezgo/goservice/internal/logger"
-	"github.com/sergionunezgo/goservice/internal/logger/zap"
+	"github.com/pkg/errors"
+	"github.com/sergionunezgo/go-service/app/service"
+	"github.com/sergionunezgo/go-service/internal/logger"
 	"github.com/urfave/cli"
 )
 
@@ -17,13 +18,9 @@ var (
 )
 
 func main() {
-	if err := zap.RegisterLog(); err != nil {
-		panic("can't setup zap logger")
-	}
-	defer zap.CloseLog()
-	logger.Log.Info("starting api service")
+	log.Print("running app")
 	if err := createApp().Run(os.Args); err != nil {
-		logger.Log.Fatalf("service failed to start: %+v\n", err)
+		log.Fatalf("app failed: %+v\n", err)
 		os.Exit(1)
 	}
 }
@@ -54,9 +51,14 @@ func createApp() *cli.App {
 	}
 
 	app.Action = func(ctx *cli.Context) error {
-		logger.Log.Info("app start action")
+		err := logger.UseZapLogger(config.LogLevel)
+		if err != nil {
+			return errors.Wrap(err, "logger UseZapLogger")
+		}
+
+		logger.Log.Info("starting service")
 		serviceRef = service.New(config)
-		err := serviceRef.Start()
+		err = serviceRef.Start()
 		return err
 	}
 
@@ -65,15 +67,15 @@ func createApp() *cli.App {
 
 // setupInterruptCloseHandler run a goroutine to listen for interruption signals to perform clean-up.
 func setupInterruptCloseHandler() {
-	channel := make(chan os.Signal, 2)
-	signal.Notify(channel, os.Interrupt, syscall.SIGTERM)
+	interruptions := make(chan os.Signal, 2)
+	signal.Notify(interruptions, os.Interrupt, syscall.SIGTERM)
 	go func() {
-		<-channel
-		logger.Log.Warn("service received interruption signal, clean-up and exit")
-		// Call close method to perform all necessary clean-up.
+		<-interruptions
+		logger.Log.Warn("interruption signal received, starting clean-up")
 		if serviceRef != nil {
 			serviceRef.Close()
 		}
+		logger.CloseLogger()
 		os.Exit(0)
 	}()
 }

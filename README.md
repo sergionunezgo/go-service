@@ -6,7 +6,7 @@ End goal is to have a single project that could be run using either gRPC or REST
 
 ## Requirements
 
-- Go v1.14
+- Go v1.16
 - make
 
 ## Environment Variables
@@ -14,7 +14,7 @@ End goal is to have a single project that could be run using either gRPC or REST
 Service:
 
 - `API_PORT`: 80
-- `LOG_LEVEL`: debug
+- `LOG_LEVEL`: info
 
 Docker:
 
