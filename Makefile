@@ -20,4 +20,7 @@ lint:
 test:
 	./script/test.sh
 
+protoc:
+	./script/protoc.sh
+
 precommit: format lint build test

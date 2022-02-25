@@ -1,0 +1,25 @@
+syntax = "proto3";
+package goservice.greeting;
+
+option go_package = "github.com/sergionunezgo/go-service/pkg/proto/greeting";
+
+import "goreuse/test/test.proto";
+
+service GreetingService {
+    rpc GetGreeting (GetGreetingRequest) returns (GetGreetingResponse);
+}
+
+// Greeting
+
+message GetGreetingRequest {
+    int32 id = 1;
+}
+
+message GetGreetingResponse {
+    Greeting greeting = 1;
+}
+
+message Greeting {
+    string message = 1;
+    goreuse.test.TestMessage test_message = 2;
+}
