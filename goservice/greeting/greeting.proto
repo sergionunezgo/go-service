@@ -4,6 +4,7 @@ package goservice.greeting;
 option go_package = "github.com/sergionunezgo/go-service/pkg/proto/greeting";
 
 import "goreuse/test/test.proto";
+import "goreuse/test/v2/test.proto";
 
 service GreetingService {
     rpc GetGreeting (GetGreetingRequest) returns (GetGreetingResponse);
@@ -21,5 +22,6 @@ message GetGreetingResponse {
 
 message Greeting {
     string message = 1;
-    goreuse.test.Message new_message = 2;
+    goreuse.test.v2.Message new_message = 2;
+    goreuse.test.TestMessage test_message = 3;
 }
