@@ -7,8 +7,8 @@ import (
 	"syscall"
 
 	"github.com/pkg/errors"
+	"github.com/sergionunezgo/go-reuse/v2/pkg/logger"
 	"github.com/sergionunezgo/go-service/app/service"
-	"github.com/sergionunezgo/go-service/internal/logger"
 	"github.com/urfave/cli"
 )
 

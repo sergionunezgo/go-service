@@ -21,6 +21,6 @@ test:
 	./script/test.sh
 
 protoc:
-	./script/protoc.sh
+	cd script/protobuf && docker-compose up -d && docker-compose down -v
 
 precommit: format lint build test
